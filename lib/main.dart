@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lecolombier/pages/login/login_screen.dart';
+import 'package:lecolombier/pages/login/sign_up_screen.dart';
+import 'package:lecolombier/utils/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'LeColombier',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const LoginScreen(),
+      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: primary)),
+      home: SignUpScreen(),
     );
   }
 }
