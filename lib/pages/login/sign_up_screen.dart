@@ -12,7 +12,7 @@ class SignUpScreen extends StatelessWidget {
           padding: EdgeInsets.all(paddingNormal),
           child: Column(
             spacing: paddingNormal,
-            children: [Image.asset(logoColorPath, height: 104), LoginWidget()],
+            children: [Image.asset(logoColorPath, height: 104), SignUpWidget()],
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import '../../../utils/materials.dart';
 
-class LoginWidget extends StatelessWidget {
-  LoginWidget({super.key});
+class SignUpWidget extends StatelessWidget {
+  SignUpWidget({super.key});
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
