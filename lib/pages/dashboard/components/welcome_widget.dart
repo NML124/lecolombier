@@ -10,6 +10,7 @@ class WelcomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double widthScreen = MediaQuery.sizeOf(context).width;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +40,7 @@ class WelcomeWidget extends StatelessWidget {
           ],
         ),
         SizedBox(
-          width: 200,
+          width: (widthScreen / 2) - paddingNormal,
           child: Image.asset(dashboardBlobPath, fit: BoxFit.contain),
         ),
       ],
