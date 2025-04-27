@@ -47,5 +47,9 @@ const paddingXXXLarge = 53.0;
 const double borderRadius = 15;
 
 ///Assets path
-String logoColorPath = "assets/images/logo_icam_color.png";
-String logoWhitePath = "assets/images/logo_icam_white.png";
+const String logoColorPath = "assets/images/logo_icam_color.png";
+const String logoWhitePath = "assets/images/logo_icam_white.png";
+const String dashboardBlobPath = "assets/images/dashboard_blob.png";
+const String fanPath = "assets/svg/fan.svg";
+const String thermometerPath = "assets/svg/thermometer.svg";
+const String dropWaterPath = "assets/svg/drop_water.svg";

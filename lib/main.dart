@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lecolombier/pages/dashboard/dashboard.dart';
 import 'package:lecolombier/pages/login/login_screen.dart';
 import 'package:lecolombier/pages/login/sign_up_screen.dart';
 import 'package:lecolombier/utils/constants.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'LeColombier',
       theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: primary)),
-      home: LoginScreen(),
+      home: DashboardScreen(),
     );
   }
 }
