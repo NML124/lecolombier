@@ -11,11 +11,11 @@ class SensorDataChanged extends SensorEvent {
 
 class LoadSensors extends SensorEvent {}
 
-class ToggleActuator extends SensorEvent {
+class SetValue extends SensorEvent {
   final String actuator;
   final bool value;
 
-  ToggleActuator({required this.actuator, required this.value});
+  SetValue({required this.actuator, required this.value});
 }
 
 class CapturePhoto extends SensorEvent {

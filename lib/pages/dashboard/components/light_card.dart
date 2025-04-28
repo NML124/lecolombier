@@ -1,13 +1,8 @@
 import '../../../utils/materials.dart';
 
-class LightCard extends StatefulWidget {
-  const LightCard({super.key, required this.habitatLowTechModel});
+class LightCard extends StatelessWidget {
+  LightCard({super.key, required this.habitatLowTechModel});
   final HabitatLowTechModel? habitatLowTechModel;
-  @override
-  State<LightCard> createState() => _LightCardState();
-}
-
-class _LightCardState extends State<LightCard> {
   bool isActivated = false;
 
   @override
@@ -21,7 +16,7 @@ class _LightCardState extends State<LightCard> {
         height: containerSize > 155 ? 220 : 255,
         child: ContainerWidget(
           child:
-              widget.habitatLowTechModel == null
+              habitatLowTechModel == null
                   ? Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: paddingSMedium,
@@ -50,15 +45,15 @@ class _LightCardState extends State<LightCard> {
                       SvgPicture.asset(lightPath),
                       Switch.adaptive(
                         activeColor: primary,
-                        value: widget.habitatLowTechModel!.isLightOn,
+                        value: habitatLowTechModel!.isLightOn,
                         onChanged: (value) {
-                          setState(() {
-                            isActivated = !isActivated;
-                          });
+                          context.read<SensorBloc>().add(
+                                SetValue(actuator: "isLightOn", value: value),
+                              );
                         },
                       ),
                       (containerSize > 156 &&
-                              widget.habitatLowTechModel!.luminosity < 300)
+                              habitatLowTechModel!.luminosity < 300)
                           ? Row(
                             spacing: paddingSMedium,
                             children: [

@@ -10,7 +10,7 @@ class SensorBloc extends Bloc<SensorEvent, SensorState> {
     on<SensorStarted>(_onStarted);
     on<SensorDataChanged>(_onDataChanged);
     on<LoadSensors>(_onLoadSensors);
-    on<ToggleActuator>(_onToggleActuator);
+    on<SetValue>(_onSetValue);
     on<CapturePhoto>(_onCapturePhoto);
     on<SensorErrorOccurred>(_onErrorOccurred);
   }
@@ -49,16 +49,9 @@ class SensorBloc extends Bloc<SensorEvent, SensorState> {
     }
   }
 
-  Future<void> _onToggleActuator(
-    ToggleActuator event,
-    Emitter<SensorState> emit,
-  ) async {
+  Future<void> _onSetValue(SetValue event, Emitter<SensorState> emit) async {
     try {
-      await repository.updateActuator(
-        actuator: event.actuator,
-        value: event.value,
-      );
-      add(LoadSensors());
+      await repository.setValue(component: event.actuator, value: event.value);
     } catch (e) {
       emit(SensorError(message: e.toString()));
     }

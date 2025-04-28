@@ -18,11 +18,11 @@ class FirebaseSensorRepository implements ISensorRepository {
   }
 
   @override
-  Future<void> updateActuator({
-    required String actuator,
-    required bool value,
+  Future<void> setValue({
+    required String component,
+    required dynamic value,
   }) async {
-    await _db.child('actuators/$actuator').set(value);
+    await _db.child('sensors').child(component).set(value);
   }
 
   @override

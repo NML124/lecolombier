@@ -27,6 +27,7 @@ class DashboardScreen extends StatelessWidget {
               builder: (context, state) {
                 if (state is SensorLoaded) {
                   habitatLowTechData = state.sensorModel;
+                  isLoading = false;
                 } else if (state is SensorLoading) {
                   isLoading = true;
                 } else {

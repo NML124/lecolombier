@@ -1,13 +1,8 @@
 import '../../../utils/materials.dart';
 
-class SecurityCameraCard extends StatefulWidget {
-  const SecurityCameraCard({super.key, required this.habitatLowTechModel});
+class SecurityCameraCard extends StatelessWidget {
+  SecurityCameraCard({super.key, required this.habitatLowTechModel});
   final HabitatLowTechModel? habitatLowTechModel;
-  @override
-  State<SecurityCameraCard> createState() => _SecurityCameraCardState();
-}
-
-class _SecurityCameraCardState extends State<SecurityCameraCard> {
   bool isActivated = false;
 
   @override
@@ -17,7 +12,7 @@ class _SecurityCameraCardState extends State<SecurityCameraCard> {
       height: 200,
       child: ContainerWidget(
         child:
-            widget.habitatLowTechModel == null
+            habitatLowTechModel == null
                 ? Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   spacing: paddingSMedium,
@@ -57,25 +52,26 @@ class _SecurityCameraCardState extends State<SecurityCameraCard> {
                                 children: [
                                   Icon(Icons.people_outline, color: primary),
                                   Text(
-                                    "${widget.habitatLowTechModel!.numberOfPeopleInHabitatLowTech} people",
+                                    "${habitatLowTechModel!.numberOfPeopleInHabitatLowTech} people",
                                   ),
                                 ],
                               ),
-                              widget
-                                      .habitatLowTechModel!
+                              habitatLowTechModel!
                                       .isHabitatLowTechCameraRecording
                                   ? recordingWidget()
                                   : SizedBox(),
                               Switch.adaptive(
                                 activeColor: primary,
                                 value:
-                                    widget
-                                        .habitatLowTechModel!
+                                    habitatLowTechModel!
                                         .isHabitatLowTechCameraRecording,
                                 onChanged: (value) {
-                                  setState(() {
-                                    isActivated = !isActivated;
-                                  });
+                                  context.read<SensorBloc>().add(
+                                    SetValue(
+                                      actuator: "isHabitatCameraRecording",
+                                      value: value,
+                                    ),
+                                  );
                                 },
                               ),
                             ],
@@ -86,8 +82,7 @@ class _SecurityCameraCardState extends State<SecurityCameraCard> {
                           child: ImageStreamingWidget(
                             height: 130,
                             imageUrl:
-                                widget
-                                    .habitatLowTechModel!
+                                habitatLowTechModel!
                                     .habitatCameraImageUrl,
                           ),
                         ),

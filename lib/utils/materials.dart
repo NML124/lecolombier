@@ -42,6 +42,7 @@ export 'package:lecolombier/bloc/repository/interface_repository_sensors.dart';
 
 //Bloc
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:lecolombier/bloc/bloc/sensor_bloc.dart';
 
 //Event
 export 'package:lecolombier/bloc/events/sensor_event.dart';

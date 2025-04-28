@@ -1,15 +1,8 @@
 import '../../../utils/materials.dart';
 
-class FanCard extends StatefulWidget {
-  const FanCard({super.key, required this.habitatLowTech});
+class FanCard extends StatelessWidget {
+  FanCard({super.key, required this.habitatLowTech});
   final HabitatLowTechModel? habitatLowTech;
-  @override
-  State<FanCard> createState() => _FanCardState();
-}
-
-class _FanCardState extends State<FanCard> {
-  bool isActivated = false;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -20,72 +13,70 @@ class _FanCardState extends State<FanCard> {
       child: SizedBox(
         height: containerSize > 155 ? 220 : 255,
         child: ContainerWidget(
-          child: 
-          
-          widget.habitatLowTech==null?
-          Column(
-            spacing: paddingSMedium,
-            children: [
-              Text(
-                'Fan',
-                style: TextStyle(
-                  fontSize: textSizeNormal,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              NoDataWidget(),
-            ],
-          )
-          :
-          Column(
-            spacing: paddingSMedium,
-            children: [
-              Text(
-                'Fan',
-                style: TextStyle(
-                  fontSize: textSizeNormal,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              containerSize > 155
-                  ? DataRow(habitatLowTech: widget.habitatLowTech!)
-                  : DataColumn(habitatLowTech: widget.habitatLowTech!),
-              Row(
-                mainAxisAlignment:
-                    containerSize > 155
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.center,
-                children: [
-                  Switch.adaptive(
-                    activeColor: primary,
-                    value: widget.habitatLowTech!.isFanOn,
-                    onChanged: (value) {
-                      setState(() {
-                        isActivated = !isActivated;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              (containerSize > 156 && widget.habitatLowTech!.temperature > 30)
-                  ? Row(
+          child:
+              habitatLowTech == null
+                  ? Column(
                     spacing: paddingSMedium,
                     children: [
-                      Icon(Icons.warning_amber_outlined, color: red),
-                      SizedBox(
-                        width: containerSize - 70,
-                        child: AutoSizeText(
-                          "The temperature is high",
-                          maxLines: 1,
-                          minFontSize: textSizeSmall,
-                          style: TextStyle(color: red),
+                      Text(
+                        'Fan',
+                        style: TextStyle(
+                          fontSize: textSizeNormal,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
+                      NoDataWidget(),
                     ],
                   )
-                  : SizedBox(),
-            ],
-          ),
+                  : Column(
+                    spacing: paddingSMedium,
+                    children: [
+                      Text(
+                        'Fan',
+                        style: TextStyle(
+                          fontSize: textSizeNormal,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      containerSize > 155
+                          ? DataRow(habitatLowTech: habitatLowTech!)
+                          : DataColumn(habitatLowTech: habitatLowTech!),
+                      Row(
+                        mainAxisAlignment:
+                            containerSize > 155
+                                ? MainAxisAlignment.end
+                                : MainAxisAlignment.center,
+                        children: [
+                          Switch.adaptive(
+                            activeColor: primary,
+                            value: habitatLowTech!.isFanOn,
+                            onChanged: (value) {
+                              context.read<SensorBloc>().add(
+                                SetValue(actuator: "isFanOn", value: value),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      (containerSize > 156 && habitatLowTech!.temperature > 30)
+                          ? Row(
+                            spacing: paddingSMedium,
+                            children: [
+                              Icon(Icons.warning_amber_outlined, color: red),
+                              SizedBox(
+                                width: containerSize - 70,
+                                child: AutoSizeText(
+                                  "The temperature is high",
+                                  maxLines: 1,
+                                  minFontSize: textSizeSmall,
+                                  style: TextStyle(color: red),
+                                ),
+                              ),
+                            ],
+                          )
+                          : SizedBox(),
+                    ],
+                  ),
         ),
       ),
     );
