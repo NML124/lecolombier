@@ -9,7 +9,7 @@ class UserModel extends Equatable{
   final bool notificationBirdhouse;
   final bool notificationSecurityCamera;
 
-  UserModel({
+  const UserModel({
     required this.id,
     required this.name,
     required this.email,

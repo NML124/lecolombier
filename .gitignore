@@ -46,5 +46,5 @@ app.*.map.json
 
 # Remove API Key
 firebase.json
-lib\firebase_options.dart
-android\app\google-services.json
+lib/firebase_options.dart
+android/app/google-services.json

@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:lecolombier/pages/dashboard/dashboard.dart';
-import 'package:lecolombier/pages/login/login_screen.dart';
-import 'package:lecolombier/pages/login/sign_up_screen.dart';
-import 'package:lecolombier/utils/constants.dart';
+import 'package:lecolombier/utils/materials.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 

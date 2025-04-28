@@ -19,6 +19,14 @@ export 'package:lecolombier/pages/dashboard/components/security_camera_card.dart
 export 'package:lecolombier/pages/dashboard/components/water_tank_card.dart';
 export 'package:lecolombier/pages/dashboard/components/image_streaming_widget.dart';
 export 'package:lecolombier/pages/dashboard/components/recording_widget.dart';
+
+//Screen
+export 'package:lecolombier/pages/dashboard/dashboard.dart';
+
+//Firebase
+export 'package:firebase_core/firebase_core.dart';
+export 'package:lecolombier/firebase_options.dart';
+
 //Utils
 export 'package:lecolombier/utils/constants.dart';
 
