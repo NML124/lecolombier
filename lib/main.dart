@@ -13,17 +13,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'LeColombier',
-      theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: primary)),
-      home: RepositoryProvider<ISensorRepository>(
-        create: (context) => FirebaseSensorRepository(),
-        child: BlocProvider<SensorBloc>(
-          create:
-              (context) =>
-                  SensorBloc(repository: context.read<ISensorRepository>())
-                    ..add(SensorStarted()),
-          child: DashboardScreen(),
+    return ToastificationWrapper(
+      child: MaterialApp(
+        title: 'LeColombier',
+        theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: primary)),
+        home: RepositoryProvider<ISensorRepository>(
+          create: (context) => FirebaseSensorRepository(),
+          child: BlocProvider<SensorBloc>(
+            create:
+                (context) =>
+                    SensorBloc(repository: context.read<ISensorRepository>())
+                      ..add(SensorStarted()),
+            child: DashboardScreen(),
+          ),
         ),
       ),
     );

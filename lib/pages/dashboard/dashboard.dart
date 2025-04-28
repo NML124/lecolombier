@@ -1,10 +1,11 @@
 import 'package:lecolombier/bloc/bloc/sensor_bloc.dart';
+import 'package:lecolombier/providers/notification/toastification_service.dart';
 
 import '../../utils/materials.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({super.key});
-
+  DashboardScreen({super.key});
+  final NotificationService notificationService = ToastificationServiceImpl();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -12,15 +13,10 @@ class DashboardScreen extends StatelessWidget {
         backgroundColor: grey,
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(paddingNormal),
-          child: BlocListener<SensorBloc,SensorState>(
+          child: BlocListener<SensorBloc, SensorState>(
             listener: (context, state) {
-              if(state is SensorError){
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                  content: Text(state.message), 
-                  backgroundColor: Colors.red,
-                  ),
-                );
+              if (state is SensorError) {
+                notificationService.showError(state.message);
               }
             },
             child: BlocBuilder<SensorBloc, SensorState>(
