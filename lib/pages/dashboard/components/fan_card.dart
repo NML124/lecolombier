@@ -15,56 +15,58 @@ class _FanCardState extends State<FanCard> {
     Size size = MediaQuery.sizeOf(context);
     double widthScreen = size.width;
     double containerSize = (widthScreen / 2) - 30;
-    return SizedBox(
-      width: containerSize,
-      height: containerSize > 155 ? 220 : 255,
-      child: ContainerWidget(
-        child: Column(
-          spacing: paddingSMedium,
-          children: [
-            Text(
-              'Fan',
-              style: TextStyle(
-                fontSize: textSizeNormal,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            containerSize > 155 ? dataRow() : dataColumn(),
-            Row(
-              mainAxisAlignment:
-                  containerSize > 155
-                      ? MainAxisAlignment.end
-                      : MainAxisAlignment.center,
-              children: [
-                Switch.adaptive(
-                  activeColor: primary,
-                  value: isActivated,
-                  onChanged: (value) {
-                    setState(() {
-                      isActivated = !isActivated;
-                    });
-                  },
+    return Flexible(
+      flex: 1,
+      child: SizedBox(
+        height: containerSize > 155 ? 220 : 255,
+        child: ContainerWidget(
+          child: Column(
+            spacing: paddingSMedium,
+            children: [
+              Text(
+                'Fan',
+                style: TextStyle(
+                  fontSize: textSizeNormal,
+                  fontWeight: FontWeight.w500,
                 ),
-              ],
-            ),
-            (containerSize > 156)
-                ? Row(
-                  spacing: paddingSMedium,
-                  children: [
-                    Icon(Icons.warning_amber_outlined, color: red),
-                    SizedBox(
-                      width: containerSize - 70,
-                      child: AutoSizeText(
-                        "The temperature is high",
-                        maxLines: 1,
-                        minFontSize: textSizeSmall,
-                        style: TextStyle(color: red),
+              ),
+              containerSize > 155 ? dataRow() : dataColumn(),
+              Row(
+                mainAxisAlignment:
+                    containerSize > 155
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.center,
+                children: [
+                  Switch.adaptive(
+                    activeColor: primary,
+                    value: isActivated,
+                    onChanged: (value) {
+                      setState(() {
+                        isActivated = !isActivated;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              (containerSize > 156)
+                  ? Row(
+                    spacing: paddingSMedium,
+                    children: [
+                      Icon(Icons.warning_amber_outlined, color: red),
+                      SizedBox(
+                        width: containerSize - 70,
+                        child: AutoSizeText(
+                          "The temperature is high",
+                          maxLines: 1,
+                          minFontSize: textSizeSmall,
+                          style: TextStyle(color: red),
+                        ),
                       ),
-                    ),
-                  ],
-                )
-                : SizedBox(),
-          ],
+                    ],
+                  )
+                  : SizedBox(),
+            ],
+          ),
         ),
       ),
     );

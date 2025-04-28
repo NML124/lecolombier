@@ -33,48 +33,39 @@ class _BirdhouseCardState extends State<BirdhouseCard> {
                 children: [
                   Flexible(
                     flex: 3,
-                    child: Container(
+                    child: ImageStreamingWidget(
                       height: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          10.0,
-                        ), // Remplacez 10.0 par le rayon souhaité
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://cdn.britannica.com/39/226539-050-D21D7721/Portrait-of-a-cat-with-whiskers-visible.jpg',
-                          ),
-                          fit:
-                              BoxFit
-                                  .cover, // Assurez-vous que l'image remplit bien le conteneur
-                        ),
-                      ),
+                      imageUrl:
+                          'https://cdn.britannica.com/39/226539-050-D21D7721/Portrait-of-a-cat-with-whiskers-visible.jpg',
                     ),
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: Stack(
-                      children: [
-                        Transform.translate(
-                          offset: Offset(17, 20),
-                          child: SvgPicture.asset(
-                            birdInBirdHousePath,
-                            width: 15,
-                          ),
-                        ),
-                        SvgPicture.asset(birdHousePath, width: 50),
-                      ],
-                    ),
-                  ),
+                  BirdWidget(),
                 ],
               ),
-              Row(
-                spacing: paddingSMedium,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [SvgPicture.asset(recordPath), Text("Recording")],
-              ),
+              recordingWidget(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class BirdWidget extends StatelessWidget {
+  const BirdWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Stack(
+        children: [
+          Transform.translate(
+            offset: Offset(17, 20),
+            child: SvgPicture.asset(birdInBirdHousePath, width: 15),
+          ),
+          SvgPicture.asset(birdHousePath, width: 50),
+        ],
       ),
     );
   }
