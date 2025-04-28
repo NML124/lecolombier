@@ -1,8 +1,8 @@
 import '../../../utils/materials.dart';
 
 class LightCard extends StatefulWidget {
-  const LightCard({super.key});
-
+  const LightCard({super.key, required this.habitatLowTechModel});
+  final HabitatLowTechModel? habitatLowTechModel;
   @override
   State<LightCard> createState() => _LightCardState();
 }
@@ -20,46 +20,63 @@ class _LightCardState extends State<LightCard> {
       child: SizedBox(
         height: containerSize > 155 ? 220 : 255,
         child: ContainerWidget(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: paddingSMedium,
-            children: [
-              Text(
-                'Light',
-                style: TextStyle(
-                  fontSize: textSizeNormal,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SvgPicture.asset(lightPath),
-              Switch.adaptive(
-                activeColor: primary,
-                value: isActivated,
-                onChanged: (value) {
-                  setState(() {
-                    isActivated = !isActivated;
-                  });
-                },
-              ),
-              (containerSize > 156)
-                  ? Row(
+          child:
+              widget.habitatLowTechModel == null
+                  ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     spacing: paddingSMedium,
                     children: [
-                      Icon(Icons.warning_amber_outlined, color: red),
-                      SizedBox(
-                        width: containerSize - 70,
-                        child: AutoSizeText(
-                          "Lighting is excessive",
-                          maxLines: 1,
-                          minFontSize: textSizeSmall,
-                          style: TextStyle(color: red),
+                      Text(
+                        'Light',
+                        style: TextStyle(
+                          fontSize: textSizeNormal,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
+                      NoDataWidget(),
                     ],
                   )
-                  : SizedBox(),
-            ],
-          ),
+                  : Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: paddingSMedium,
+                    children: [
+                      Text(
+                        'Light',
+                        style: TextStyle(
+                          fontSize: textSizeNormal,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SvgPicture.asset(lightPath),
+                      Switch.adaptive(
+                        activeColor: primary,
+                        value: widget.habitatLowTechModel!.isLightOn,
+                        onChanged: (value) {
+                          setState(() {
+                            isActivated = !isActivated;
+                          });
+                        },
+                      ),
+                      (containerSize > 156 &&
+                              widget.habitatLowTechModel!.luminosity < 300)
+                          ? Row(
+                            spacing: paddingSMedium,
+                            children: [
+                              Icon(Icons.warning_amber_outlined, color: red),
+                              SizedBox(
+                                width: containerSize - 70,
+                                child: AutoSizeText(
+                                  "Low luminosity detected",
+                                  maxLines: 1,
+                                  minFontSize: textSizeSmall,
+                                  style: TextStyle(color: red),
+                                ),
+                              ),
+                            ],
+                          )
+                          : SizedBox(),
+                    ],
+                  ),
         ),
       ),
     );

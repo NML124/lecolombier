@@ -1,8 +1,8 @@
 import '../../../utils/materials.dart';
 
 class FanCard extends StatefulWidget {
-  const FanCard({super.key});
-
+  const FanCard({super.key, required this.habitatLowTech});
+  final HabitatLowTechModel? habitatLowTech;
   @override
   State<FanCard> createState() => _FanCardState();
 }
@@ -20,7 +20,10 @@ class _FanCardState extends State<FanCard> {
       child: SizedBox(
         height: containerSize > 155 ? 220 : 255,
         child: ContainerWidget(
-          child: Column(
+          child: 
+          
+          widget.habitatLowTech==null?
+          Column(
             spacing: paddingSMedium,
             children: [
               Text(
@@ -30,7 +33,23 @@ class _FanCardState extends State<FanCard> {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              containerSize > 155 ? dataRow() : dataColumn(),
+              NoDataWidget(),
+            ],
+          )
+          :
+          Column(
+            spacing: paddingSMedium,
+            children: [
+              Text(
+                'Fan',
+                style: TextStyle(
+                  fontSize: textSizeNormal,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              containerSize > 155
+                  ? DataRow(habitatLowTech: widget.habitatLowTech!)
+                  : DataColumn(habitatLowTech: widget.habitatLowTech!),
               Row(
                 mainAxisAlignment:
                     containerSize > 155
@@ -39,7 +58,7 @@ class _FanCardState extends State<FanCard> {
                 children: [
                   Switch.adaptive(
                     activeColor: primary,
-                    value: isActivated,
+                    value: widget.habitatLowTech!.isFanOn,
                     onChanged: (value) {
                       setState(() {
                         isActivated = !isActivated;
@@ -48,7 +67,7 @@ class _FanCardState extends State<FanCard> {
                   ),
                 ],
               ),
-              (containerSize > 156)
+              (containerSize > 156 && widget.habitatLowTech!.temperature > 30)
                   ? Row(
                     spacing: paddingSMedium,
                     children: [
@@ -73,9 +92,9 @@ class _FanCardState extends State<FanCard> {
   }
 }
 
-class dataColumn extends StatelessWidget {
-  const dataColumn({super.key});
-
+class DataColumn extends StatelessWidget {
+  const DataColumn({super.key, required this.habitatLowTech});
+  final HabitatLowTechModel habitatLowTech;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -85,14 +104,20 @@ class dataColumn extends StatelessWidget {
           spacing: paddingSMedium,
           children: [
             SvgPicture.asset(thermometerPath, width: 20, height: 20),
-            Text("30°C", style: TextStyle(fontSize: textSizeNormal)),
+            Text(
+              "${habitatLowTech.temperature}°C",
+              style: TextStyle(fontSize: textSizeNormal),
+            ),
           ],
         ),
         Row(
           spacing: paddingSMedium,
           children: [
             SvgPicture.asset(dropWaterPath, width: 20, height: 20),
-            Text("75 %", style: TextStyle(fontSize: textSizeNormal)),
+            Text(
+              "${habitatLowTech.humidity}%",
+              style: TextStyle(fontSize: textSizeNormal),
+            ),
           ],
         ),
         SvgPicture.asset(fanPath, width: 50, height: 50),
@@ -101,9 +126,9 @@ class dataColumn extends StatelessWidget {
   }
 }
 
-class dataRow extends StatelessWidget {
-  const dataRow({super.key});
-
+class DataRow extends StatelessWidget {
+  const DataRow({super.key, required this.habitatLowTech});
+  final HabitatLowTechModel habitatLowTech;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -116,14 +141,20 @@ class dataRow extends StatelessWidget {
               spacing: paddingSMedium,
               children: [
                 SvgPicture.asset(thermometerPath, width: 20, height: 20),
-                Text("30°C", style: TextStyle(fontSize: textSizeNormal)),
+                Text(
+                  "${habitatLowTech.temperature}°C",
+                  style: TextStyle(fontSize: textSizeNormal),
+                ),
               ],
             ),
             Row(
               spacing: paddingSMedium,
               children: [
                 SvgPicture.asset(dropWaterPath, width: 20, height: 20),
-                Text("75 %", style: TextStyle(fontSize: textSizeNormal)),
+                Text(
+                  "${habitatLowTech.humidity}%",
+                  style: TextStyle(fontSize: textSizeNormal),
+                ),
               ],
             ),
           ],

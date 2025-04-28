@@ -6,19 +6,24 @@ class ImageStreamingWidget extends StatelessWidget {
     required this.imageUrl,
     required this.height,
   });
-  final String imageUrl;
+  final String? imageUrl;
   final double height;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        image: DecorationImage(
-          image: NetworkImage(imageUrl),
-          fit: BoxFit.cover,
-        ),
-      ),
-    );
+    return imageUrl != null
+        ? Container(
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            image: DecorationImage(
+              image: NetworkImage(imageUrl!),
+              fit: BoxFit.cover,
+            ),
+          ),
+        )
+        : SizedBox(
+          height: height,
+          child: Text("There is no image to display."),
+        );
   }
 }

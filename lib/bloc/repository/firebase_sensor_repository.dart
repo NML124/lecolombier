@@ -4,12 +4,12 @@ import 'package:lecolombier/utils/materials.dart';
 
 class FirebaseSensorRepository implements ISensorRepository {
   final DatabaseReference _db = FirebaseDatabase.instance.ref();
-  
+
   @override
-  Future<SensorModel> fetchSensors() async {
+  Future<HabitatLowTechModel> fetchSensors() async {
     final snapshot = await _db.child('sensors').get();
     if (snapshot.exists) {
-      return SensorModel.fromJson(
+      return HabitatLowTechModel.fromJson(
         Map<String, dynamic>.from(snapshot.value as Map),
       );
     } else {
@@ -56,16 +56,15 @@ class FirebaseSensorRepository implements ISensorRepository {
   }
 
   @override
-  Stream<SensorModel> watchSensors() {
+  Stream<HabitatLowTechModel> watchSensors() {
     return _db.child('sensors').onValue.map((event) {
       final snapshot = event.snapshot;
       if (snapshot.exists) {
         final data = Map<String, dynamic>.from(snapshot.value as Map);
-        return SensorModel.fromJson(data);
+        return HabitatLowTechModel.fromJson(data);
       } else {
         throw Exception('No data found in realtime database');
       }
     });
   }
-
 }

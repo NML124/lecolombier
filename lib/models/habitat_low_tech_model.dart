@@ -1,4 +1,4 @@
-class SensorModel {
+class HabitatLowTechModel {
   final double temperature;
   final double humidity;
   final bool isTankFilled;
@@ -6,11 +6,12 @@ class SensorModel {
   final double luminosity;
   final bool isLightOn;
   final bool isFanOn;
-  final bool isPumpOn;
   final String? habitatCameraImageUrl;
   final String? birdHouseCameraImageUrl;
-
-  SensorModel({
+  final int numberOfPeopleInHabitatLowTech;
+  final bool isHabitatLowTechCameraRecording;
+  final bool isBirdCameraRecording;
+  HabitatLowTechModel({
     required this.temperature,
     required this.humidity,
     required this.isTankFilled,
@@ -18,13 +19,15 @@ class SensorModel {
     required this.luminosity,
     required this.isLightOn,
     required this.isFanOn,
-    required this.isPumpOn,
+    required this.numberOfPeopleInHabitatLowTech,
+    required this.isBirdCameraRecording,
+    required this.isHabitatLowTechCameraRecording,
     this.habitatCameraImageUrl,
     this.birdHouseCameraImageUrl,
   });
 
-  factory SensorModel.fromJson(Map<String, dynamic> json) {
-    return SensorModel(
+  factory HabitatLowTechModel.fromJson(Map<String, dynamic> json) {
+    return HabitatLowTechModel(
       temperature: (json['temperature'] ?? 0).toDouble(),
       humidity: (json['humidity'] ?? 0).toDouble(),
       isTankFilled: json['isTankFilled'] ?? false,
@@ -32,7 +35,10 @@ class SensorModel {
       luminosity: (json['luminosity'] ?? 0).toDouble(),
       isLightOn: json['isLightOn'] ?? false,
       isFanOn: json['isFanOn'] ?? false,
-      isPumpOn: json['isPumpOn'] ?? false,
+      isBirdCameraRecording: json['isBirdHouseCameraRecording'] ?? false,
+      isHabitatLowTechCameraRecording:
+          json['isHabitatCameraRecording'] ?? false,
+      numberOfPeopleInHabitatLowTech: json['peopleInColombier'] ?? 0,
       habitatCameraImageUrl: json['habitatCameraImageUrl'],
       birdHouseCameraImageUrl: json['birdHouseCameraImageUrl'],
     );
@@ -47,9 +53,11 @@ class SensorModel {
       'luminosity': luminosity,
       'isLightOn': isLightOn,
       'isFanOn': isFanOn,
-      'isPumpOn': isPumpOn,
       'habitatCameraImageUrl': habitatCameraImageUrl,
       'birdHouseCameraImageUrl': birdHouseCameraImageUrl,
+      'isBirdHouseCameraRecording': isBirdCameraRecording,
+      'isHabitatCameraRecording': isHabitatLowTechCameraRecording,
+      'peopleInColombier': numberOfPeopleInHabitatLowTech,
     };
   }
 }

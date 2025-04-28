@@ -43,6 +43,7 @@ dependencies:
   flutter_bloc: ^9.1.0
   firebase_database: ^11.3.5
   toastification: ^3.0.2
+  skeletonizer: ^1.4.3
 
 dev_dependencies:
   flutter_test:

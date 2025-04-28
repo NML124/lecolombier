@@ -5,7 +5,7 @@ abstract class SensorEvent {}
 class SensorStarted extends SensorEvent {}
 
 class SensorDataChanged extends SensorEvent {
-  final SensorModel sensor;
+  final HabitatLowTechModel sensor;
   SensorDataChanged(this.sensor);
 }
 
@@ -29,6 +29,3 @@ class SensorErrorOccurred extends SensorEvent {
 
   SensorErrorOccurred(this.message);
 }
-
-
-

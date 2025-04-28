@@ -14,13 +14,13 @@ export 'package:lecolombier/customWidget/text_form_field_custom.dart';
 export 'package:lecolombier/pages/login/components/sign_up_widget.dart';
 export 'package:lecolombier/customWidget/icon_button_custom.dart';
 export 'package:lecolombier/pages/dashboard/components/welcome_widget.dart';
-export 'package:lecolombier/pages/dashboard/components/fan_card.dart';
 export 'package:lecolombier/pages/dashboard/components/bird_house_card.dart';
 export 'package:lecolombier/pages/dashboard/components/light_card.dart';
 export 'package:lecolombier/pages/dashboard/components/security_camera_card.dart';
 export 'package:lecolombier/pages/dashboard/components/water_tank_card.dart';
 export 'package:lecolombier/pages/dashboard/components/image_streaming_widget.dart';
 export 'package:lecolombier/pages/dashboard/components/recording_widget.dart';
+export 'package:lecolombier/pages/dashboard/components/no_data_widget.dart';
 
 //Screen
 export 'package:lecolombier/pages/dashboard/dashboard.dart';
@@ -35,7 +35,7 @@ export 'package:lecolombier/providers/notification/notification_service.dart';
 
 //Model
 export 'package:lecolombier/models/user_model.dart';
-export 'package:lecolombier/models/sensor_model.dart';
+export 'package:lecolombier/models/habitat_low_tech_model.dart';
 
 //Repository
 export 'package:lecolombier/bloc/repository/interface_repository_sensors.dart';

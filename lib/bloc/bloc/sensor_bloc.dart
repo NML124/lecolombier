@@ -4,7 +4,7 @@ import '../../utils/materials.dart';
 
 class SensorBloc extends Bloc<SensorEvent, SensorState> {
   final ISensorRepository repository;
-  StreamSubscription<SensorModel>? _sensorsSubscription;
+  StreamSubscription<HabitatLowTechModel>? _sensorsSubscription;
 
   SensorBloc({required this.repository}) : super(SensorInitial()) {
     on<SensorStarted>(_onStarted);
