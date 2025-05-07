@@ -39,14 +39,14 @@ class DashboardScreen extends StatelessWidget {
                     spacing: paddingLarge,
                     children: [
                       WelcomeWidget(),
-                      Row(
+                      RowColumnWidget(
                         spacing: paddingSMedium,
                         children: [
                           FanCard(habitatLowTech: habitatLowTechData),
                           LightCard(habitatLowTechModel: habitatLowTechData),
                         ],
                       ),
-                      Row(
+                      RowColumnWidget(
                         spacing: paddingSMedium,
                         children: [
                           WaterTankCard(
@@ -69,5 +69,24 @@ class DashboardScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class RowColumnWidget extends StatelessWidget {
+  const RowColumnWidget({
+    super.key,
+    required this.children,
+    this.limitWidth = LIMIT_WIDTH,
+    this.spacing = 0,
+  });
+  final List<Widget> children;
+  final int limitWidth;
+  final double spacing;
+  @override
+  Widget build(BuildContext context) {
+    double widthScreen = MediaQuery.sizeOf(context).width;
+    return widthScreen < limitWidth
+        ? Column(spacing: spacing, children: children)
+        : Row(spacing: spacing, children: children);
   }
 }

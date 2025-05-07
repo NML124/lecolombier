@@ -58,3 +58,6 @@ const String waterTankPath = "assets/svg/tank.svg";
 const String birdHousePath = "assets/svg/house_bird.svg";
 const String birdInBirdHousePath = "assets/svg/bird.svg";
 const String recordPath = "assets/svg/record.svg";
+
+//double
+const int LIMIT_WIDTH = 312;

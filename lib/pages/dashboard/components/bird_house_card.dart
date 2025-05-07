@@ -1,74 +1,74 @@
 import '../../../utils/materials.dart';
 
-class BirdhouseCard extends StatefulWidget {
-  const BirdhouseCard({super.key, required this.habitatLowTechModel});
+class BirdhouseCard extends StatelessWidget {
+  const BirdhouseCard({
+    super.key,
+    required this.habitatLowTechModel,
+    this.limitWidth = LIMIT_WIDTH,
+  });
   final HabitatLowTechModel? habitatLowTechModel;
-  @override
-  State<BirdhouseCard> createState() => _BirdhouseCardState();
-}
-
-class _BirdhouseCardState extends State<BirdhouseCard> {
-  bool isActivated = false;
-
+  final int limitWidth;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      flex: 2,
-      child: SizedBox(
-        height: 200,
-        child: ContainerWidget(
-          child:
-              widget.habitatLowTechModel == null
-                  ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    spacing: paddingSMedium,
-                    children: [
-                      Text(
-                        'Birdhouse',
-                        style: TextStyle(
-                          fontSize: textSizeNormal,
-                          fontWeight: FontWeight.w500,
-                        ),
+    Size size = MediaQuery.sizeOf(context);
+    double widthScreen = size.width;
+    double containerSize =
+        (widthScreen - (2 * paddingNormal) - paddingSMedium) * 2 / 3;
+    return SizedBox(
+      width:
+          widthScreen < limitWidth
+              ? widthScreen - (2 * paddingNormal)
+              : containerSize,
+      height: 220,
+      child: ContainerWidget(
+        child:
+            habitatLowTechModel == null
+                ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: paddingSMedium,
+                  children: [
+                    Text(
+                      'Birdhouse',
+                      style: TextStyle(
+                        fontSize: textSizeNormal,
+                        fontWeight: FontWeight.w500,
                       ),
-                      NoDataWidget(),
-                    ],
-                  )
-                  : Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    spacing: paddingSMedium,
-                    children: [
-                      Text(
-                        'Birdhouse',
-                        style: TextStyle(
-                          fontSize: textSizeNormal,
-                          fontWeight: FontWeight.w500,
-                        ),
+                    ),
+                    NoDataWidget(),
+                  ],
+                )
+                : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  spacing: paddingSMedium,
+                  children: [
+                    Text(
+                      'Birdhouse',
+                      style: TextStyle(
+                        fontSize: textSizeNormal,
+                        fontWeight: FontWeight.w500,
                       ),
-                      Row(
-                        spacing: paddingSMedium,
-                        children: [
-                          Flexible(
-                            flex: 3,
-                            child: ImageStreamingWidget(
-                              height: 100,
-                              imageUrl:
-                                  widget
-                                      .habitatLowTechModel!
-                                      .birdHouseCameraImageUrl,
-                            ),
+                    ),
+                    Row(
+                      spacing: paddingSMedium,
+                      children: [
+                        Flexible(
+                          flex: 3,
+                          child: ImageStreamingWidget(
+                            height: 100,
+                            imageUrl:
+                                habitatLowTechModel!.birdHouseCameraImageUrl,
                           ),
-                          BirdWidget(
-                            isBirdInHouse:
-                                widget.habitatLowTechModel!.isBirdDetected,
-                          ),
-                        ],
-                      ),
-                      widget.habitatLowTechModel!.isBirdCameraRecording
-                          ? recordingWidget()
-                          : SizedBox(),
-                    ],
-                  ),
-        ),
+                        ),
+                        BirdWidget(
+                          isBirdInHouse: habitatLowTechModel!.isBirdDetected,
+                        ),
+                      ],
+                    ),
+                    habitatLowTechModel!.isBirdCameraRecording
+                        ? recordingWidget()
+                        : SizedBox(),
+                  ],
+                ),
       ),
     );
   }
@@ -79,8 +79,7 @@ class BirdWidget extends StatelessWidget {
   final bool isBirdInHouse;
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      flex: 1,
+    return SizedBox(
       child: Stack(
         children: [
           Transform.translate(
